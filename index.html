@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="includes/css/app.css"/>
+    <link rel="stylesheet" href="includes/css/bootstrap.min.css"/>
+    <title>Generator postaci Warhammer Fantasy Role Play</title>
+</head>
+<body>
+<div id="content" class="container">
+
+        <div class="row">
+            <h3>Generator postaci Warhammer Fantasy Role Play</h3>
+        </div>
+
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Wybór postaci</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="character_form" class="form-inline" style="text-align: center">
+                        <div class="form-group">
+                            <label for="sex">Płeć</label>
+                            <select id="sex" class="form-control">
+                                <option value="m">mężczyzna</option>
+                                <option value="f">kobieta</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="age_type">Wiek</label>
+                            <select id="age_type" class="form-control">
+                                <option value="young">młody</option>
+                                <option value="old">stary</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="race">Rasa</label>
+                            <select id="race" class="form-control"></select>
+                        </div>
+                        <button class="btn btn-primary" id="step1">Krok 1</button>
+                        <span id="step2_section" style="display: none">
+                            <div class="form-group">
+                                <label for="charclass">Klasa</label>
+                                <select id="charclass" class="form-control"></select>
+                            </div>
+                            <button class="btn btn-primary" id="step2">Krok 2</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Karta postaci</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="well well-sm" style="background: #fcfcfc">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed stats-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Charakterystyka</th>
+                                        <th>SZ</th><th>WW</th><th>US</th><th>S</th><th>Wt</th><th>Żw</th><th>I</th><th>A</th><th>Zr</th><th>CP</th><th>Int</th><th>Op</th><th>SW</th><th>Ogd</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr id="base_stats">
+                                        <td>Początkowa</td>
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr id="stats_progress">
+                                        <td>Schemat rozwoju</td>
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aktualna</td>
+                                        <td colspan="14" style="text-align: center; color: #888">gracz może zwiększyć pojedynczą cechę ze schematu rozwoju</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-condensed stats-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Poruszanie się</th>
+                                        <th>ostrożnie</th><th>normalnie</th><th>biegiem</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr id="speed_round">
+                                        <td>na rundę (~10 sekund)</td>
+                                        <td></td><td></td><td></td>
+                                    </tr>
+                                    <tr id="speed_minute">
+                                        <td>na turę gry (~1 min)</td>
+                                        <td></td><td></td><td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-condensed stats-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Obiążenie</th>
+                                        <th>dopuszczalne</th><th>maksymalne</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr id="load">
+                                        <td>Wartość</td><td></td><td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Informacje</td><td colspan="2"><span id="load_info"></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="well well-sm" style="background: #fcfcfc">
+                        <div class="row">
+                            <div class="col-md-3"><strong>Character: </strong><span id="personality"></span></div>
+                            <div class="col-md-3"><strong>Wiek: </strong><span id="age"></span></div>
+                            <div class="col-md-3"><strong>Wzrost: </strong><span id="height"></span></div>
+                            <div class="col-md-3"><strong>Punkty przeznaczenia: </strong><span id="fate_points"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><strong>Profesja: </strong><span id="profession"></span></div>
+                            <div class="col-md-3"><strong>Specjalizacja: </strong><span id="specialization"></span></div>
+                            <div class="col-md-3"><strong>Pieniądze: </strong><span id="money"></span></div>
+                            <div class="col-md-3"><strong>Punkty magii: </strong><span id="magic_points"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><strong>Punkty umiejętności: </strong><span id="skills_no"></span></div>
+                            <div class="col-md-3"><strong>Oczy: </strong><span id="eyes"></span></div>
+                            <div class="col-md-3"><strong>Włosy: </strong><span id="hair"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"><strong>Znak gwiezdny: </strong><span id="stellar_sign"></span></div>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div class="well well-sm" style="background: #fcfcfc">
+                        <div class="row">
+                            <div class="col-md-12"><strong>Lista umiejętności: </strong><span id="skills"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"><strong>Lista przedmiotów: </strong><span id="items"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"><strong>Profesje wyjściowe: </strong><span id="advances"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<script src="app.js"></script>
+<script src="includes/js/bootstrap.min.js"></script>
+</body>
+</html>
